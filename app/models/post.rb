@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   has_one_attached :image
   belongs_to :user
-  has_many :comments
+  has_many :comments, dependent: :delete_all
 
   def as_json(options = {})
     super(options.merge(methods: :image_url))

@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ update destroy ]
   before_action :authenticate_user!, only: %i[ update destroy ]
+  before_action :authorize_user, only: %i[ update destroy ]
 
   def index
     @comments = Comment.all
@@ -43,5 +44,11 @@ class CommentsController < ApplicationController
 
     def comment_params
       params.permit(:body, :post_id)
+    end
+
+    def authorize_user
+      unless @comment.user == current_user
+        render json: { error: 'You are not authorized to perform this action' }, status: :forbidden
+      end
     end
 end

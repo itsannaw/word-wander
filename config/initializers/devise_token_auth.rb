@@ -5,7 +5,7 @@ DeviseTokenAuth.setup do |config|
   # client is responsible for keeping track of the changing tokens. Change
   # this to false to prevent the Authorization header from changing after
   # each request.
-  # config.change_headers_on_each_request = true
+  config.change_headers_on_each_request = false
 
   # By default, users will need to re-authenticate after 2 weeks. This setting
   # determines how long tokens will remain valid after they are issued.
@@ -18,13 +18,13 @@ DeviseTokenAuth.setup do |config|
 
   # Sets the max number of concurrent devices per user, which is 10 by default.
   # After this limit is reached, the oldest tokens will be removed.
-  # config.max_number_of_devices = 10
+  config.max_number_of_devices = 10
 
   # Sometimes it's necessary to make several requests to the API at the same
   # time. In this case, each request in the batch will need to share the same
   # auth token. This setting determines how far apart the requests can be while
   # still using the same auth token.
-  # config.batch_request_buffer_throttle = 5.seconds
+  config.batch_request_buffer_throttle = 5.seconds
 
   # This route will be the prefix for all oauth2 redirect callbacks. For
   # example, using the default '/omniauth', the github oauth2 provider will
@@ -42,14 +42,14 @@ DeviseTokenAuth.setup do |config|
   # config.default_callbacks = true
 
   # Makes it possible to change the headers names
-  # config.headers_names = {
-  #   :'authorization' => 'Authorization',
-  #   :'access-token' => 'access-token',
-  #   :'client' => 'client',
-  #   :'expiry' => 'expiry',
-  #   :'uid' => 'uid',
-  #   :'token-type' => 'token-type'
-  # }
+  config.headers_names = {
+    :'authorization' => 'Authorization',
+    :'access-token' => 'access-token',
+    :'client' => 'client',
+    :'expiry' => 'expiry',
+    :'uid' => 'uid',
+    :'token-type' => 'token-type'
+  }
 
   # Makes it possible to use custom uid column
   # config.other_uid = "foo"
