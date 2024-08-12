@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
   has_many :posts
+  has_many :comments
 end
