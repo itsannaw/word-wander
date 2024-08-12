@@ -4,7 +4,13 @@ class PostsController < ApplicationController
   before_action :authorize_user, only: %i[update destroy]
 
   def index
-    @posts = Post.all
+    if params[:filter] == 'my'
+      return render json: { error: 'You need to sign in or sign up before continuing.' }, status: :unauthorized unless current_user
+      @posts = current_user.posts
+    else
+      @posts = Post.all
+    end
+
     render json: @posts.as_json(include: :user)
   end
 
