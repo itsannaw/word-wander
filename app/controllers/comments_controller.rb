@@ -15,6 +15,9 @@ class CommentsController < ApplicationController
   end
 
   def create
+    return render json: { error: 'You need to sign in or sign up before continuing.' },
+     status: :unauthorized unless current_user
+
     @comment = current_user.comments.new(comment_params)
 
     if @comment.save
@@ -47,8 +50,6 @@ class CommentsController < ApplicationController
     end
 
     def authorize_user
-      unless @comment.user == current_user
-        render json: { error: 'You are not authorized to perform this action' }, status: :forbidden
-      end
+      super(@comment)
     end
 end

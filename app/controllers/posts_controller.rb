@@ -5,26 +5,28 @@ class PostsController < ApplicationController
 
   def index
     if params[:filter] == 'my'
-      return render json: { error: 'You need to sign in or sign up before continuing.' }, status: :unauthorized unless current_user
-      @posts = current_user.posts
+      return render json: { error: 'You need to sign in or sign up before continuing.' },
+        status: :unauthorized unless current_user
+      @posts = paginate(current_user.posts)
     else
-      @posts = Post.all
+      @posts = paginate(Post.all)
     end
 
-    render json: @posts.as_json(include: :user)
+    total_pages = @posts.total_pages
+    render json: { posts: @posts.as_json(include: :user), total_pages: total_pages }
   end
 
   def show
-    render json: @post.as_json(include: :user)
+    render json: @post.as_json(include: [:user, :comments])
   end
 
   def create
-    @post = current_user.posts.new(post_params)
+    @comment = current_user.comments.new(comment_params)
 
-    if @post.save
-      render json: @post, status: :created
+    if @comment.save
+      render json: @comment, status: :created, location: new_comment_url(@comment)
     else
-      render json: @post.errors, status: :unprocessable_entity
+      render json: @comment.errors, status: :unprocessable_entity
     end
   end
 
@@ -52,8 +54,11 @@ class PostsController < ApplicationController
   end
 
   def authorize_user
-    unless @post.user == current_user
-      render json: { error: 'You are not authorized to perform this action' }, status: :forbidden
-    end
+    super(@post)
   end
+
+  def paginate(relation)
+    relation.page(params[:page]).per(params[:per_page])
+  end
+
 end

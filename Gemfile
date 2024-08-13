@@ -2,11 +2,15 @@ source "https://rubygems.org"
 
 ruby "3.3.3"
 
+gem 'rack-cors', '~> 2.0', '>= 2.0.2'
+
 gem 'devise', '~> 4.9', '>= 4.9.4'
 
 gem 'devise_token_auth', '~> 1.2', '>= 1.2.3'
 
 gem 'dotenv-rails', '~> 3.1', '>= 3.1.2'
+
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.4"
