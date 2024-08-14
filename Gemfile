@@ -6,6 +6,8 @@ gem 'activeadmin', '~> 3.2', '>= 3.2.3'
 
 gem 'arctic_admin', '~> 4.3', '>= 4.3.1'
 
+gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
+
 gem 'rack-cors', '~> 2.0', '>= 2.0.2'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
