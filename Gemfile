@@ -2,6 +2,10 @@ source "https://rubygems.org"
 
 ruby "3.3.3"
 
+gem 'activeadmin', '~> 3.2', '>= 3.2.3'
+
+gem 'arctic_admin', '~> 4.3', '>= 4.3.1'
+
 gem 'rack-cors', '~> 2.0', '>= 2.0.2'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'

@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class CommentsController < ApiController
   before_action :set_comment, only: %i[ update destroy ]
   before_action :authenticate_user!, only: %i[ update destroy ]
   before_action :authorize_user, only: %i[ update destroy ]

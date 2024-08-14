@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class PostsController < ApiController
   before_action :set_post, only: %i[show update destroy]
   before_action :authenticate_user!, only: %i[create update destroy]
   before_action :authorize_user, only: %i[update destroy]

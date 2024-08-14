@@ -11,4 +11,12 @@ class Post < ApplicationRecord
     Rails.application.routes.url_helpers.rails_blob_url(image, only_path: true) if image.attached?
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "description", "id", "title", "updated_at", "user_id"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["user"]
+  end
+
 end
