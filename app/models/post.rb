@@ -3,6 +3,10 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :delete_all
 
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :image, presence: true
+
   def as_json(options = {})
     super(options.merge(methods: :image_url))
   end
