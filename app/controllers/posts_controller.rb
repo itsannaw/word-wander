@@ -17,16 +17,16 @@ class PostsController < ApiController
   end
 
   def show
-    render json: @post.as_json(include: [:user, :comments])
+    render json: @post.as_json(include: { user: { only: [:name] }, comments: { include: { user: { only: [:name] } } } })
   end
 
   def create
-    @comment = current_user.comments.new(comment_params)
+    @post = current_user.posts.new(post_params)
 
-    if @comment.save
-      render json: @comment, status: :created, location: new_comment_url(@comment)
+    if @post.save
+      render json: @post, status: :created
     else
-      render json: @comment.errors, status: :unprocessable_entity
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
 
