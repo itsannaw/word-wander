@@ -76,12 +76,14 @@ group :development do
   # gem "spring"
 end
 
-# group :development, :test do
-#   gem 'rspec-rails'
-# end
+group :development, :test do
+  gem 'rspec-rails', '~> 6.1', '>= 6.1.3'
+end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'factory_bot_rails', '~> 6.4', '>= 6.4.3'
+  gem 'shoulda-matchers', '~> 6.3', '>= 6.3.1'
 end
