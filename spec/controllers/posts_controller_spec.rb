@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PostsController, type: :controller do
   let(:user) { create(:user) }
   let(:post_params) { attributes_for(:post) }
-  let!(:post) { create(:post, user: user) } # Use let! to ensure post is created before tests
+  let!(:post) { create(:post, user: user) }
 
   before do
     request.headers.merge!(user.create_new_auth_token)
